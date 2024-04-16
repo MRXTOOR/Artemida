@@ -1,6 +1,9 @@
 # main.py
 
 import os
+
+import pyfiglet
+
 from Artemida.module.preprocessing import Preprocessor
 from Artemida.module.depth_estimation import DepthEstimator
 from Artemida.module.heatmap_visualization import HeatmapVisualizer
@@ -9,6 +12,9 @@ from Artemida.module.visualization import Visualizer
 
 
 def main():
+    ascii_art = pyfiglet.figlet_format("Artemida")
+    print(ascii_art)
+
     image_folder = "images-test"
     image_files = os.listdir(image_folder)
 

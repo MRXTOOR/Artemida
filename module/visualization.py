@@ -7,11 +7,3 @@ class Visualizer:
         cv2.imshow("Processed Image", processed_image)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
-
-
-class HeatmapVisualizer:
-    pass
-
-
-class AnnotationVisualizer:
-    pass
