@@ -1,10 +1,12 @@
-import os
+# main.py
 
+import os
 from Artemida.module.preprocessing import Preprocessor
 from Artemida.module.depth_estimation import DepthEstimator
-from Artemida.module.integration import Integrator
-from Artemida.module.mineral_detection import MineralDetector
+from Artemida.module.heatmap_visualization import HeatmapVisualizer
+from Artemida.module.annatationVSLS import AnnotationVisualizer
 from Artemida.module.visualization import Visualizer
+
 
 def main():
     image_folder = "images-test"
@@ -19,9 +21,9 @@ def main():
             continue
 
         depth_map = DepthEstimator.estimate_depth(processed_image)
-        combined_image = Integrator.integrate_depth_and_spectral(processed_image, depth_map)
-        image_with_minerals = MineralDetector.detect_minerals(combined_image)
-        Visualizer.visualize_images(processed_image, image_with_minerals)
+        heatmap_image = HeatmapVisualizer.visualize_heatmap(depth_map)
+        annotated_image = AnnotationVisualizer.annotate_regions(heatmap_image)
+        Visualizer.visualize_images(processed_image, annotated_image)
 
 if __name__ == "__main__":
     main()
