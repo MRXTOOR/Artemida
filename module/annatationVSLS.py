@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 class AnnotationVisualizer:
-    @staticmethod 
+    @staticmethod
     def annotate_regions(heatmap_image, depth_threshold=100, min_contour_area=500):
         gray_heatmap = cv2.cvtColor(heatmap_image, cv2.COLOR_BGR2GRAY)
 
