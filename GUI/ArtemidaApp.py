@@ -1,12 +1,12 @@
 import tkinter as tk
-from datetime import datetime
-from tkinter import ttk, simpledialog, messagebox, filedialog
-
+from tkinter import ttk, filedialog, messagebox
+import cv2
 from PIL import Image, ImageTk
 import os
 
 from Artemida.GUI.module.ImageAnalyzer import analyze_image
 from Artemida.GUI.module.ImageList import imageList
+from Artemida.module.preprocessing import Preprocessor
 
 
 class ArtemidaApp:
@@ -20,8 +20,6 @@ class ArtemidaApp:
         self.create_image_list()
         self.create_buttons()
         self.create_image_preview()
-    '''master.configure(bg="gray")'''
-
 
     def create_menu(self):
         self.menu = tk.Menu(self.master)
@@ -32,10 +30,14 @@ class ArtemidaApp:
         self.file_menu.add_command(label="Изменить название", command=self.rename_image)
         self.menu.add_cascade(label="Файл", menu=self.file_menu)
 
+        self.help_menu = tk.Menu(self.menu, tearoff=0)
+        self.help_menu.add_command(label="О программе", command=self.show_about)
+        self.help_menu.add_command(label="Справка", command=self.show_help)
+        self.menu.add_cascade(label="Справка", menu=self.help_menu)
+
     def create_image_list(self):
         self.image_list = imageList(self.master)
         self.image_list.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
-
 
     def create_buttons(self):
         button_frame = tk.Frame(self.master)
@@ -61,6 +63,15 @@ class ArtemidaApp:
     def delete_image(self):
         self.image_list.delete_selected_image()
         self.hide_preview(None)
+    def help_menu_for_people(self):
+        help_text = ("Справка по программе Artemida:\n\n"
+                     "- Чтобы загрузить изображение, выберите Файл -> Загрузить изображение и выберите нужный файл.\n\n"
+                     "- Чтобы переименовать изображение, выберите Файл -> Изменить название и введите новое название.\n\n"
+                     "- Чтобы удалить изображение, выберите изображение из списка и нажмите кнопку 'Удалить'.\n\n"
+                     "- Чтобы анализировать изображение, выберите изображение из списка и нажмите кнопку 'Анализировать'.\n\n"
+                     "- Для выхода из программы, нажмите кнопку 'Выход' или закройте окно.\n\n"
+                     "Для получения дополнительной информации обращайтесь к разработчику.")
+        tk.messagebox.showinfo("Справка", help_text)
 
     def analyze_images(self):
         selected_image = self.image_list.get_selected_image()
@@ -70,7 +81,12 @@ class ArtemidaApp:
     def load_image(self):
         filename = filedialog.askopenfilename()
         if filename:
-            self.image_list.add_image(filename)
+            try:
+                image = cv2.imread(filename)
+                preprocessed_image = Preprocessor.preprocess_image(image)
+                self.image_list.add_image(filename)
+            except ValueError as e:
+                tk.messagebox.showwarning("Предупреждение", str(e))
 
     def rename_image(self):
         self.image_list.rename_selected_image()
@@ -86,11 +102,32 @@ class ArtemidaApp:
             self.image_preview_label.config(image=photo)
             self.image_preview_label.image = photo
 
-
     def hide_preview(self, event):
         self.image_preview_label.config(image=None)
         self.image_preview_label.image = None
 
+    def show_help(self):
+        help_text = ("Справка по программе Artemida:\n\n"
+                     "- Чтобы загрузить изображение, выберите Файл -> Загрузить изображение и выберите нужный файл.\n\n"
+                     "- Чтобы переименовать изображение, выберите Файл -> Изменить название и введите новое название.\n\n"
+                     "- Чтобы удалить изображение, выберите изображение из списка и нажмите кнопку 'Удалить'.\n\n"
+                     "- Чтобы анализировать изображение, выберите изображение из списка и нажмите кнопку 'Анализировать'.\n\n"
+                     "- Для выхода из программы, нажмите кнопку 'Выход' или закройте окно.\n\n"
+                     "Для получения дополнительной информации обращайтесь к разработчику.")
+        tk.messagebox.showinfo("Справка", help_text)
+
+    def show_about(self):
+        about_window = tk.Toplevel(self.master)
+        about_window.title("О программе")
+        about_window.geometry("500x400")
+        about_window.resizable(False, False)
+
+        about_label = tk.Label(about_window, text="Artemida v0.1\n\n"
+                                                  "Artemida - это программа для анализа изображений.\n\n"
+                                                  "Она позволяет загружать изображения, анализировать их и удалять ненужные.\n\n"
+                                                  "Для начала работы выберите Файл -> Загрузить изображение.\n\n",
+                               justify="center")
+        about_label.pack(fill=tk.BOTH, padx=10, pady=10)
 root = tk.Tk()
 app = ArtemidaApp(root)
 root.mainloop()
