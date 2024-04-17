@@ -3,7 +3,7 @@ import cv2
 from Artemida import main
 
 def analyze_image(selected_image):
-    selected_image_path = os.path.join("../../images-test", selected_image)
+    selected_image_path = os.path.join("images-test", selected_image)
     if not os.path.isfile(selected_image_path):
         print(f"Error: Image file '{selected_image}' not found.")
         return

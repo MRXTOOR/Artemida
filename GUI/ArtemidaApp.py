@@ -1,11 +1,13 @@
-# ArtemidaApp.py
-
 import tkinter as tk
-from tkinter import filedialog, ttk, simpledialog
-import os
+from datetime import datetime
+from tkinter import ttk, simpledialog, messagebox, filedialog
+
 from PIL import Image, ImageTk
-from module.ImageList import  imageList
-from module.ImageAnalyzer import analyze_image
+import os
+
+from Artemida.GUI.module.ImageAnalyzer import analyze_image
+from Artemida.GUI.module.ImageList import imageList
+
 
 class ArtemidaApp:
     def __init__(self, master):
@@ -43,8 +45,8 @@ class ArtemidaApp:
     def create_image_preview(self):
         self.image_preview_label = tk.Label(self.master, text="Предпросмотр", anchor=tk.W)
         self.image_preview_label.pack(fill=tk.BOTH, expand=True)
-        self.image_list.bind("<Motion>", self.show_preview)
-        self.image_list.bind("<Leave>", self.hide_preview)
+        self.image_list.listbox.bind("<ButtonRelease-1>", self.show_preview)
+
 
     def delete_image(self):
         self.image_list.delete_selected_image()
@@ -64,14 +66,16 @@ class ArtemidaApp:
         self.image_list.rename_selected_image()
 
     def show_preview(self, event):
-        selected_image = self.image_list.get_selected_image()
-        if selected_image:
-            image_path = os.path.join("../images-test", selected_image)
+        selected_index = self.image_list.listbox.curselection()
+        if selected_index:
+            selected_image = self.image_list.listbox.get(selected_index)
+            image_path = os.path.join("images-test", selected_image)
             image = Image.open(image_path)
             image.thumbnail((400, 400))
             photo = ImageTk.PhotoImage(image)
             self.image_preview_label.config(image=photo)
             self.image_preview_label.image = photo
+
 
     def hide_preview(self, event):
         self.image_preview_label.config(image=None)
