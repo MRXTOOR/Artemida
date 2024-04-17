@@ -1,4 +1,4 @@
-# mineral_detection.py
+
 
 import cv2
 
