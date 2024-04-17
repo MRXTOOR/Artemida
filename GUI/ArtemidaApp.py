@@ -6,7 +6,7 @@ import os
 
 from Artemida.GUI.module.ImageAnalyzer import analyze_image
 from Artemida.GUI.module.ImageList import imageList
-from Artemida.module.preprocessing import Preprocessor
+from Artemida.moduleThermalSpectrum.preprocessing import Preprocessor
 
 
 class ArtemidaApp:
