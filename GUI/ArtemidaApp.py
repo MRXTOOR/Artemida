@@ -12,15 +12,16 @@ from Artemida.GUI.module.ImageList import imageList
 class ArtemidaApp:
     def __init__(self, master):
         self.master = master
-        master.title("Artemida")
-        master.geometry("600x900")
+        master.title("Artemida v0.1")
+        master.geometry("900x900")
         master.resizable(False, False)
         master.iconbitmap("index.ico")
-
         self.create_menu()
         self.create_image_list()
         self.create_buttons()
         self.create_image_preview()
+    '''master.configure(bg="gray")'''
+
 
     def create_menu(self):
         self.menu = tk.Menu(self.master)
@@ -33,20 +34,29 @@ class ArtemidaApp:
 
     def create_image_list(self):
         self.image_list = imageList(self.master)
-        self.image_list.pack(fill=tk.BOTH, expand=True)
+        self.image_list.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
+
 
     def create_buttons(self):
-        self.delete_button = ttk.Button(self.master, text="Удалить", command=self.delete_image)
-        self.delete_button.pack(side=tk.BOTTOM)
+        button_frame = tk.Frame(self.master)
+        button_frame.pack(side=tk.BOTTOM, fill=tk.X)
 
-        self.analyze_button = ttk.Button(self.master, text="Анализировать", command=self.analyze_images)
-        self.analyze_button.pack(side=tk.BOTTOM)
+        self.delete_button = ttk.Button(button_frame, text="Удалить", command=self.delete_image)
+        self.delete_button.pack(side=tk.LEFT, padx=10, pady=10)
+
+        self.exit_button = ttk.Button(button_frame, text="Выход", command=self.exit_program)
+        self.exit_button.pack(side=tk.LEFT, padx=10, pady=10)
+
+        self.analyze_button = ttk.Button(button_frame, text="Анализировать", command=self.analyze_images)
+        self.analyze_button.pack(side=tk.LEFT, padx=10, pady=10)
 
     def create_image_preview(self):
         self.image_preview_label = tk.Label(self.master, text="Предпросмотр", anchor=tk.W)
-        self.image_preview_label.pack(fill=tk.BOTH, expand=True)
+        self.image_preview_label.pack(fill=tk.X, padx=10, pady=(10, 0), side=tk.TOP)
         self.image_list.listbox.bind("<ButtonRelease-1>", self.show_preview)
 
+    def exit_program(self):
+        self.master.destroy()
 
     def delete_image(self):
         self.image_list.delete_selected_image()
