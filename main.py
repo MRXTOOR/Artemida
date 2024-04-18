@@ -18,7 +18,7 @@ def analyze_selected_image(image):
     try:
         processed_image = Preprocessor.preprocess_image(image)
     except ValueError as e:
-        print(f"Error processing image: {e}")
+        print(f"Ошибка обработки изображения: {e}")
         return
 
     depth_map = DepthEstimator.estimate_depth(processed_image)
