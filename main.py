@@ -1,18 +1,27 @@
-
-import os
 import pyfiglet
-from Artemida.moduleThermalSpectrum.preprocessing import Preprocessor
-from Artemida.moduleThermalSpectrum.depth_estimation import DepthEstimator
-from Artemida.moduleThermalSpectrum.heatmap_visualization import HeatmapVisualizer
-from Artemida.moduleThermalSpectrum.annatationVSLS import AnnotationVisualizer
-from Artemida.moduleThermalSpectrum.visualization import Visualizer
+
+from AndromedaPROJECT.Artemida.moduleThermalSpectrum.annatationVSLS import AnnotationVisualizer
+from AndromedaPROJECT.Artemida.moduleThermalSpectrum.depth_estimation import DepthEstimator
+from AndromedaPROJECT.Artemida.moduleThermalSpectrum.heatmap_visualization import HeatmapVisualizer
+from AndromedaPROJECT.Artemida.moduleThermalSpectrum.preprocessing import Preprocessor
+from AndromedaPROJECT.Artemida.moduleThermalSpectrum.visualization import Visualizer
+
+
+#from moduleThermalSpectrum.preprocessing import Preprocessor
+#from moduleThermalSpectrum.depth_estimation import DepthEstimator
+#from moduleThermalSpectrum.heatmap_visualization import HeatmapVisualizer
+#from moduleThermalSpectrum.annatationVSLS import AnnotationVisualizer
+#from moduleThermalSpectrum.visualization import Visualizer
+
 
 def main():
     ascii_art = pyfiglet.figlet_format("Artemida")
     print(ascii_art)
 
+
 if __name__ == "__main__":
     main()
+
 
 def analyze_selected_image(image):
     try:
@@ -25,4 +34,3 @@ def analyze_selected_image(image):
     heatmap_image = HeatmapVisualizer.visualize_heatmap(depth_map)
     annotated_image = AnnotationVisualizer.annotate_regions(heatmap_image)
     Visualizer.visualize_images(processed_image, annotated_image)
-

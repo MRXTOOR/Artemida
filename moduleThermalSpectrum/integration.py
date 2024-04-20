@@ -1,5 +1,6 @@
 import cv2
 
+
 class Integrator:
     @staticmethod
     def integrate_depth_and_spectral(image, depth_map):

@@ -1,5 +1,6 @@
 import cv2
 
+
 class DepthEstimator:
     @staticmethod
     def estimate_depth(image):

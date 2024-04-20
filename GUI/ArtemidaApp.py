@@ -1,19 +1,28 @@
+import sys
 import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
 import cv2
 from PIL import Image, ImageTk
 import os
 
-from Artemida.GUI.module.ImageAnalyzer import analyze_image
-from Artemida.GUI.module.ImageList import imageList
-from Artemida.moduleThermalSpectrum.preprocessing import Preprocessor
+from AndromedaPROJECT.Artemida.GUI.module.ImageAnalyzer import analyze_image
+from AndromedaPROJECT.Artemida.GUI.module.ImageList import imageList
+from AndromedaPROJECT.Artemida.moduleThermalSpectrum.preprocessing import Preprocessor
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
+
+#from module.ImageAnalyzer import analyze_image
+#from module.ImageList import imageList
+#from AndromedaPROJECT.Artemida.moduleThermalSpectrum.preprocessing import Preprocessor
+
+
+# сюды крч название папки
 
 class ArtemidaApp:
     def __init__(self, master):
         self.master = master
         master.title("Artemida v0.1")
-        master.geometry("900x900")
+        master.geometry("700x600")
         master.resizable(False, False)
         master.iconbitmap("index.ico")
         self.create_menu()
@@ -63,6 +72,7 @@ class ArtemidaApp:
     def delete_image(self):
         self.image_list.delete_selected_image()
         self.hide_preview(None)
+
     def help_menu_for_people(self):
         help_text = ("Справка по программе Artemida:\n\n"
                      "- Чтобы загрузить изображение, выберите Файл -> Загрузить изображение и выберите нужный файл.\n\n"
@@ -128,6 +138,8 @@ class ArtemidaApp:
                                                   "Для начала работы выберите Файл -> Загрузить изображение.\n\n",
                                justify="center")
         about_label.pack(fill=tk.BOTH, padx=10, pady=10)
+
+
 root = tk.Tk()
 app = ArtemidaApp(root)
 root.mainloop()

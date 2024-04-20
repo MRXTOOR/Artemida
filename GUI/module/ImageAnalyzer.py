@@ -1,6 +1,8 @@
 import os
 import cv2
-from Artemida import main
+
+from AndromedaPROJECT.Artemida import main
+
 
 def analyze_image(selected_image):
     selected_image_path = os.path.join("images-test", selected_image)
