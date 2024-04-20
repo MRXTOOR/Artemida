@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 
+
 class AnnotationVisualizer:
     @staticmethod
     def annotate_regions(heatmap_image, depth_threshold=100, min_contour_area=500):
@@ -36,7 +37,8 @@ class AnnotationVisualizer:
                 x, y, w, h = cv2.boundingRect(contour)
                 text_x = x + w // 2 - 50
                 text_y = y + h + 30
-                cv2.putText(annotated_image, "MATERIAL", (text_x, text_y), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
+                cv2.putText(annotated_image, "MATERIAL", (text_x, text_y), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0),
+                            1)
 
         annotated_image = cv2.addWeighted(heatmap_image, 0.5, annotated_image, 0.5, 0)
 

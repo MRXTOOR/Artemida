@@ -1,5 +1,6 @@
 import cv2
 
+
 class Visualizer:
     @staticmethod
     def visualize_images(original_image, processed_image):

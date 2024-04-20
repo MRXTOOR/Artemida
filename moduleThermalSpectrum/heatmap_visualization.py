@@ -1,5 +1,6 @@
 import cv2
 
+
 class HeatmapVisualizer:
     @staticmethod
     def visualize_heatmap(depth_map):
