@@ -1,7 +1,7 @@
 import os
 import cv2
 
-from AndromedaPROJECT.Artemida import main
+import main
 
 
 def analyze_image(selected_image):

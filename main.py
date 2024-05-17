@@ -1,10 +1,10 @@
 import pyfiglet
 
-from AndromedaPROJECT.Artemida.moduleThermalSpectrum.annatationVSLS import AnnotationVisualizer
-from AndromedaPROJECT.Artemida.moduleThermalSpectrum.depth_estimation import DepthEstimator
-from AndromedaPROJECT.Artemida.moduleThermalSpectrum.heatmap_visualization import HeatmapVisualizer
-from AndromedaPROJECT.Artemida.moduleThermalSpectrum.preprocessing import Preprocessor
-from AndromedaPROJECT.Artemida.moduleThermalSpectrum.visualization import Visualizer
+from moduleThermalSpectrum.annatationVSLS import AnnotationVisualizer
+from moduleThermalSpectrum.depth_estimation import DepthEstimator
+from moduleThermalSpectrum.heatmap_visualization import HeatmapVisualizer
+from moduleThermalSpectrum.preprocessing import Preprocessor
+from moduleThermalSpectrum.visualization import Visualizer
 
 
 #from moduleThermalSpectrum.preprocessing import Preprocessor

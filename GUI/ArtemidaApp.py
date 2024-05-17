@@ -5,9 +5,9 @@ import cv2
 from PIL import Image, ImageTk
 import os
 
-from AndromedaPROJECT.Artemida.GUI.module.ImageAnalyzer import analyze_image
-from AndromedaPROJECT.Artemida.GUI.module.ImageList import imageList
-from AndromedaPROJECT.Artemida.moduleThermalSpectrum.preprocessing import Preprocessor
+from GUI.module.ImageAnalyzer import analyze_image
+from module.ImageList import imageList
+from moduleThermalSpectrum.preprocessing import Preprocessor
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -24,7 +24,7 @@ class ArtemidaApp:
         master.title("Artemida v0.1")
         master.geometry("700x600")
         master.resizable(False, False)
-        master.iconbitmap("index.ico")
+       # master.iconbitmap("index.ico")
         self.create_menu()
         self.create_image_list()
         self.create_buttons()
